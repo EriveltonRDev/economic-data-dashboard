@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Análise de Dados Econômicos Mundiais</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-line"></i>
+            <h1>EconoDash</h1>
+        </div>
+        <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <main>
+        <section class="filters">
+            <div class="filter-container">
+                <h2>Filtros</h2>
+                <div class="filter-group">
+                    <label for="indicator-select">Indicador:</label>
+                    <select id="indicator-select">
+                        <option value="NY.GDP.MKTP.CD">PIB (US$)</option>
+                        <option value="NY.GDP.PCAP.CD">PIB per capita (US$)</option>
+                        <option value="SP.POP.TOTL">População Total</option>
+                        <option value="IT.NET.USER.ZS">Usuários de Internet (% da população)</option>
+                        <option value="EN.ATM.CO2E.PC">Emissões de CO2 (toneladas per capita)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="countries-select">Países:</label>
+                    <div class="countries-container">
+                        <div class="country-checkbox">
+                            <input type="checkbox" id="country-BRA" value="BRA" checked>
+                            <label for="country-BRA">Brasil</label>
+                        </div>
+                        <div class="country-checkbox">
+                            <input type="checkbox" id="country-USA" value="USA" checked>
+                            <label for="country-USA">Estados Unidos</label>
+                        </div>
+                        <div class="country-checkbox">
+                            <input type="checkbox" id="country-CHN" value="CHN" checked>
+                            <label for="country-CHN">China</label>
+                        </div>
+                        <div class="country-checkbox">
+                            <input type="checkbox" id="country-DEU" value="DEU">
+                            <label for="country-DEU">Alemanha</label>
+                        </div>
+                        <div class="country-checkbox">
+                            <input type="checkbox" id="country-JPN" value="JPN">
+                            <label for="country-JPN">Japão</label>
+                        </div>
+                        <div class="country-checkbox">
+                            <input type="checkbox" id="country-IND" value="IND">
+                            <label for="country-IND">Índia</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label for="year-range">Período:</label>
+                    <div class="year-range-container">
+                        <span id="year-start">1990</span>
+                        <input type="range" id="year-range" min="1990" max="2022" value="2022">
+                        <span id="year-end">2022</span>
+                    </div>
+                </div>
+                <button id="update-btn" class="btn-primary">Atualizar Dados</button>
+            </div>
+        </section>
+
+        <section class="dashboard">
+            <div class="stats-container">
+                <div class="stat-card" id="stat-card-1">
+                    <div class="stat-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Global</h3>
+                        <p class="stat-value">Carregando...</p>
+                        <p class="stat-change"><span>0%</span> desde 1990</p>
+                    </div>
+                </div>
+                <div class="stat-card" id="stat-card-2">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Média</h3>
+                        <p class="stat-value">Carregando...</p>
+                        <p class="stat-change"><span>0%</span> desde 1990</p>
+                    </div>
+                </div>
+                <div class="stat-card" id="stat-card-3">
+                    <div class="stat-icon">
+                        <i class="fas fa-arrow-trend-up"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Maior Valor</h3>
+                        <p class="stat-value">Carregando...</p>
+                        <p class="stat-country">País: --</p>
+                    </div>
+                </div>
+                <div class="stat-card" id="stat-card-4">
+                    <div class="stat-icon">
+                        <i class="fas fa-arrow-trend-down"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Menor Valor</h3>
+                        <p class="stat-value">Carregando...</p>
+                        <p class="stat-country">País: --</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <h3>Evolução Temporal</h3>
+                    <div class="chart-container">
+                        <canvas id="time-series-chart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <h3>Comparação entre Países</h3>
+                    <div class="chart-container">
+                        <canvas id="comparison-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Dashboard de Análise de Dados Econômicos Mundiais | Desenvolvido com <i class="fas fa-heart"></i> por [Seu Nome]</p>
+        <p>Dados fornecidos pela API DataBank (Indicadores de Desenvolvimento Mundial)</p>
+    </footer>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Carregando dados...</p>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
